@@ -1,0 +1,9 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Function
+metadata:
+  name: function-patch-and-transform
+  annotations:
+    # Install with Provider; Composition waits for Function Healthy
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  package: {{ .Values.function.package | quote }}
