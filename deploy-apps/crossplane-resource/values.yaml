@@ -1,0 +1,21 @@
+# Namespace where Crossplane (and provider ServiceAccounts) run
+crossplaneNamespace: crossplane
+
+provider:
+  package: xpkg.crossplane.io/crossplane-contrib/provider-kubernetes:v1.3.1
+
+function:
+  package: xpkg.crossplane.io/crossplane-contrib/function-patch-and-transform:v0.9.0
+
+# Example Object XR — set enabled: false to skip
+example:
+  enabled: true
+  name: demo-nginx
+  # Value written to ConfigMap key "static" and served by nginx
+  content: |
+    <html>
+      <body>
+        <h1>Hello from Crossplane Object</h1>
+        <p>This page is served from a ConfigMap key named static.</p>
+      </body>
+    </html>

@@ -40,3 +40,5 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
+          # Needed while provider/function CRDs are still installing
+          - SkipDryRunOnMissingResource=true
