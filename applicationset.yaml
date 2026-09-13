@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-charts-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+
+  generators:
+    - git:
+        repoURL: https://github.com/bhagataws/argocd-crossplane.git
+        revision: main
+        files:
+          - path: "deploy-apps/**/Chart.yaml"
+        # requeueAfterSeconds: 180   # optional polling interval override
+
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+      # path.basename = name of the directory containing Chart.yaml
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/bhagataws/argocd-crossplane.git
+        targetRevision: main
+        path: '{{.path.path}}'          # directory that holds Chart.yaml
+        helm:
+          valueFiles:
+            - values.yaml
+      destination:
+        server: https://kubernetes.default.svc
+        # Use preferredNamespace from Chart.yaml when set; otherwise directory name
+        namespace: '{{ if hasKey . "preferredNamespace" }}{{ .preferredNamespace }}{{ else }}{{ .path.basename }}{{ end }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
