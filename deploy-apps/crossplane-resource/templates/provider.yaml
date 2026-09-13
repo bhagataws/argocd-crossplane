@@ -40,7 +40,7 @@ subjects:
     name: provider-kubernetes
     namespace: {{ .Values.crossplaneNamespace | quote }}
 ---
-apiVersion: kubernetes.crossplane.io/v1alpha1
+apiVersion: kubernetes.m.crossplane.io/v1alpha1
 kind: ProviderConfig
 metadata:
   name: default
