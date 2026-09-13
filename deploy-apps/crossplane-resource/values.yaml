@@ -1,0 +1,14 @@
+# Must exist: ApplicationSet always passes --values values.yaml
+crossplaneNamespace: crossplane
+
+provider:
+  package: xpkg.upbound.io/crossplane-contrib/provider-kubernetes:v1.0.0
+
+function:
+  package: xpkg.upbound.io/crossplane-contrib/function-patch-and-transform:v0.9.0
+
+example:
+  enabled: true
+  name: hello
+  content: |
+    Hello from Crossplane
