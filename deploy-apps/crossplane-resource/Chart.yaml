@@ -1,9 +1,0 @@
-apiVersion: v2
-name: crossplane-resource
-description: Crossplane provider, XRD, and Composition for Object (ConfigMap + nginx Deployment)
-type: application
-version: 0.1.0
-appVersion: "1.0.0"
-preferredNamespace: crossplane-resource
-# After Crossplane app (syncWave 0) is Healthy
-
