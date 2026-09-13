@@ -1,4 +1,0 @@
-# Values for the official Crossplane subchart
-# https://docs.crossplane.io/latest/get-started/install/
-crossplane:
-  replicas: 1
